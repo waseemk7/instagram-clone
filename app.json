@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "52258361-9505-4ac1-a575-8afb18643143"
+      }
+    },
+    "owner": "waseemkurne3"
   }
 }
