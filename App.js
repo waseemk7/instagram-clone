@@ -16,7 +16,7 @@ function HomeStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="HomeStack"
         component={HomeScreen}
         options={{ headerShown: false }}
       />
@@ -36,6 +36,7 @@ function App() {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home-outline" size={size} color={color} />
             ),
+            headerTitleAlign: "left",
           }}
         />
         <Tab.Screen
@@ -45,6 +46,7 @@ function App() {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="search-outline" size={size} color={color} />
             ),
+            headerTitleAlign: "left",
           }}
         />
         <Tab.Screen
@@ -54,6 +56,7 @@ function App() {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="add-circle-outline" size={size} color={color} />
             ),
+            headerTitleAlign: "left",
           }}
         />
         <Tab.Screen
@@ -63,6 +66,7 @@ function App() {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="videocam-outline" size={size} color={color} />
             ),
+            headerTitleAlign: "left",
           }}
         />
         <Tab.Screen
@@ -72,6 +76,7 @@ function App() {
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="person-outline" size={size} color={color} />
             ),
+            headerTitleAlign: "left",
           }}
         />
         {/* Add more tab screens for other sections */}
