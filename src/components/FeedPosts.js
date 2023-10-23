@@ -7,69 +7,68 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { Feather, AntDesign } from "@expo/vector-icons"; // You'll need to import the Feather icons library
+import { Feather, AntDesign } from "@expo/vector-icons";
 
 const FeedPosts = ({ feedPosts }) => {
   const [likedPosts, setLikedPosts] = useState([]);
+
   const toggleLike = (postId) => {
     if (likedPosts.includes(postId)) {
-      // Post is already liked, remove it from likedPosts array
       setLikedPosts(likedPosts.filter((id) => id !== postId));
     } else {
-      // Post is not liked, add it to likedPosts array
       setLikedPosts([...likedPosts, postId]);
     }
   };
+
+  const Post = ({ post, isLiked, onLikeToggle }) => {
+    const { id, userImage, imageUrl, username, likes, caption, timestamp } = post;
+
+    return (
+      <View style={styles.postContainer}>
+        <View style={styles.postHeader}>
+          <Image source={{ uri: userImage }} style={styles.userImage} />
+          <Text style={styles.username}>{username}</Text>
+        </View>
+        <Image source={{ uri: imageUrl }} style={styles.postImage} />
+        <View style={styles.postDetails}>
+          <View style={styles.iconsContainer}>
+            <TouchableOpacity onPress={() => onLikeToggle(id)} style={styles.icons}>
+              <AntDesign name={isLiked ? "heart" : "hearto"} size={28} color={isLiked ? "red" : "black"} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.icons}>
+              <Feather name="message-circle" size={28} color="black" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.icons}>
+              <Feather name="send" size={28} color="black" />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.likes}>{likes} likes</Text>
+          <Text style={styles.caption}>{caption}</Text>
+          <Text style={styles.timestamp}>{timestamp}</Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
         data={feedPosts}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => `post_${item.id}`}
         renderItem={({ item }) => (
-          <View style={styles.postContainer}>
-            <View style={styles.postHeader}>
-              <Image
-                source={{ uri: item.userImage }}
-                style={styles.userImage}
-              />
-              <Text style={styles.username}>{item.username}</Text>
-            </View>
-            <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
-            <View style={styles.postDetails}>
-              <View style={styles.iconsContainer}>
-                <TouchableOpacity
-                  onPress={() => toggleLike(item.id)}
-                  style={styles.icons}
-                >
-                  <AntDesign
-                    name={likedPosts.includes(item.id) ? "heart" : "hearto"} // Toggle heart icon based on like state
-                    size={28}
-                    color={likedPosts.includes(item.id) ? "red" : "black"} // Toggle icon color based on like state
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.icons}>
-                  <Feather name="message-circle" size={28} color="black" />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.icons}>
-                  <Feather name="send" size={28} color="black" />
-                </TouchableOpacity>
-              </View>
-              <Text style={styles.likes}>{item.likes} likes</Text>
-              <Text style={styles.caption}>{item.caption}</Text>
-              <Text style={styles.timestamp}>{item.timestamp}</Text>
-            </View>
-          </View>
+          <Post
+            post={item}
+            isLiked={likedPosts.includes(item.id)}
+            onLikeToggle={toggleLike}
+          />
         )}
       />
     </View>
   );
 };
 
-export default FeedPosts;
-
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     backgroundColor: "#fff",
   },
   postContainer: {
@@ -115,3 +114,5 @@ const styles = StyleSheet.create({
     color: "gray",
   },
 });
+
+export default FeedPosts;
