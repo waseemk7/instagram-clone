@@ -4,13 +4,13 @@ const data = [
   {
     id: "1",
     username: "john_doe",
-    imageUrl: "https://via.placeholder.com/200",
+    imageUrl: "https://www.freepnglogos.com/uploads/one-piece-logo-9.jpg",
     caption: "Beautiful sunset!",
   },
   {
     id: "2",
     username: "jane_smith",
-    imageUrl: "https://via.placeholder.com/200",
+    imageUrl: "https://static.bandainamcoent.eu/high/one-piece/one-piece-world-seeker/00-page-setup/opws_game-thumbnail.jpg",
     caption: "Exploring the wilderness.",
   },
   // Add more posts here
