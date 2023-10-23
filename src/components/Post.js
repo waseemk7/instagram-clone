@@ -1,9 +1,10 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons";
+import { WebView } from "react-native-webview"; // Import WebView
 
 const Post = ({ post, isLiked, onLikeToggle }) => {
-  const { id, userImage, imageUrl, username, likes, caption, timestamp } = post;
+  const { id, userImage, mediaUrl, mediaType, username, likes, caption, timestamp } = post;
 
   return (
     <View style={styles.postContainer}>
@@ -11,7 +12,14 @@ const Post = ({ post, isLiked, onLikeToggle }) => {
         <Image source={{ uri: userImage }} style={styles.userImage} />
         <Text style={styles.username}>{username}</Text>
       </View>
-      <Image source={{ uri: imageUrl }} style={styles.postImage} />
+      {mediaType === "image" ? (
+        <Image source={{ uri: mediaUrl }} style={styles.postImage} />
+      ) : mediaType === "video" ? (
+        <WebView
+          source={{ uri: mediaUrl }}
+          style={styles.postVideo}
+        />
+      ) : null}
       <View style={styles.postDetails}>
         <View style={styles.iconsContainer}>
           <TouchableOpacity onPress={() => onLikeToggle(id)} style={styles.icons}>
@@ -56,6 +64,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   postImage: {
+    width: "100%",
+    height: 300,
+  },
+  postVideo: {
     width: "100%",
     height: 300,
   },
