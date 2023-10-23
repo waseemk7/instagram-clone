@@ -1,59 +1,8 @@
-import { View, Text, FlatList, Image, StyleSheet } from "react-native";
-
-const data = [
-  {
-    id: "1",
-    username: "john_doe",
-    imageUrl: "https://www.freepnglogos.com/uploads/one-piece-logo-9.jpg",
-    caption: "Beautiful sunset!",
-  },
-  {
-    id: "2",
-    username: "jane_smith",
-    imageUrl: "https://static.bandainamcoent.eu/high/one-piece/one-piece-world-seeker/00-page-setup/opws_game-thumbnail.jpg",
-    caption: "Exploring the wilderness.",
-  },
-  // Add more posts here
-];
+import FeedPosts from "../components/FeedPosts";
 
 const HomeScreen = () => {
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.postContainer}>
-            <Text style={styles.username}>{item.username}</Text>
-            <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
-            <Text style={styles.caption}>{item.caption}</Text>
-          </View>
-        )}
-      />
-    </View>
-  );
+  return <FeedPosts />;
 };
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  postContainer: {
-    marginBottom: 20,
-  },
-  username: {
-    fontSize: 16,
-    fontWeight: "bold",
-    paddingLeft: 10,
-  },
-  postImage: {
-    width: "100%",
-    height: 300,
-  },
-  caption: {
-    paddingLeft: 10,
-  },
-});

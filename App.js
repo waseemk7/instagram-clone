@@ -41,7 +41,7 @@ function App() {
             headerTitle: () => (
               <Image
                 source={require('./src/assets/Instagram_logo.png')}
-                style={{ width: 120, height: 40 }} // Adjust width and height as needed
+                style={{ width: 130, height: 40 }}
               />
             ),
           }}
@@ -86,7 +86,6 @@ function App() {
             headerTitleAlign: "left",
           }}
         />
-        {/* Add more tab screens for other sections */}
       </Tab.Navigator>
     </NavigationContainer>
   );
