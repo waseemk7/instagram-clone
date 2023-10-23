@@ -1,23 +1,24 @@
 import React from "react";
-import { View, ScrollView, Image, Text, StyleSheet } from "react-native";
+import { View, FlatList, Image, Text, StyleSheet } from "react-native";
 
 const Stories = ({ stories }) => {
   return (
-    <ScrollView
+    <FlatList
+      data={stories}
       horizontal
       showsHorizontalScrollIndicator={false}
-      style={styles.container}
-    >
-      {stories.map((story, index) => (
-        <View key={index} style={styles.storyContainer}>
+      contentContainerStyle={styles.container}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({ item }) => (
+        <View style={styles.storyContainer}>
           <Image
-            source={{ uri: story.profilePicture }}
+            source={{ uri: item.profilePicture }}
             style={styles.profilePicture}
           />
-          <Text style={styles.username}>{story.username}</Text>
+          <Text style={styles.username}>{item.username}</Text>
         </View>
-      ))}
-    </ScrollView>
+      )}
+    />
   );
 };
 
