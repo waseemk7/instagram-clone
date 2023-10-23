@@ -1,6 +1,7 @@
 // App.js
 
 import React from "react";
+import { Image } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -37,6 +38,12 @@ function App() {
               <Ionicons name="home-outline" size={size} color={color} />
             ),
             headerTitleAlign: "left",
+            headerTitle: () => (
+              <Image
+                source={require('./src/assets/Instagram_logo.png')}
+                style={{ width: 130, height: 40 }}
+              />
+            ),
           }}
         />
         <Tab.Screen
@@ -79,7 +86,6 @@ function App() {
             headerTitleAlign: "left",
           }}
         />
-        {/* Add more tab screens for other sections */}
       </Tab.Navigator>
     </NavigationContainer>
   );
