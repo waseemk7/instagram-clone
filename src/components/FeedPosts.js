@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,21 +7,11 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { Feather } from "@expo/vector-icons"; // You'll need to import the Feather icons library
+import { Feather, AntDesign } from "@expo/vector-icons"; // You'll need to import the Feather icons library
 
 const data = [
   {
     id: "1",
-    username: "john_doe",
-    userImage: "https://www.freepnglogos.com/uploads/one-piece-logo-9.jpg",
-    imageUrl: "https://www.freepnglogos.com/uploads/one-piece-logo-9.jpg",
-    caption: "Beautiful sunset!",
-    likes: 235,
-    comments: 18,
-    timestamp: "2 hours ago",
-  },
-  {
-    id: "2",
     username: "jane_smith",
     userImage:
       "https://static.bandainamcoent.eu/high/one-piece/one-piece-world-seeker/00-page-setup/opws_game-thumbnail.jpg",
@@ -32,10 +22,30 @@ const data = [
     comments: 12,
     timestamp: "4 hours ago",
   },
+  {
+    id: "2",
+    username: "john_doe",
+    userImage: "https://www.freepnglogos.com/uploads/one-piece-logo-9.jpg",
+    imageUrl: "https://www.freepnglogos.com/uploads/one-piece-logo-9.jpg",
+    caption: "Beautiful sunset!",
+    likes: 235,
+    comments: 18,
+    timestamp: "2 hours ago",
+  },
   // Add more posts here
 ];
 
 const FeedPosts = () => {
+  const [likedPosts, setLikedPosts] = useState([]);
+  const toggleLike = (postId) => {
+    if (likedPosts.includes(postId)) {
+      // Post is already liked, remove it from likedPosts array
+      setLikedPosts(likedPosts.filter((id) => id !== postId));
+    } else {
+      // Post is not liked, add it to likedPosts array
+      setLikedPosts([...likedPosts, postId]);
+    }
+  };
   return (
     <View style={styles.container}>
       <FlatList
@@ -53,8 +63,15 @@ const FeedPosts = () => {
             <Image source={{ uri: item.imageUrl }} style={styles.postImage} />
             <View style={styles.postDetails}>
               <View style={styles.iconsContainer}>
-                <TouchableOpacity style={styles.icons}>
-                  <Feather name="heart" size={28} color="black" />
+                <TouchableOpacity
+                  onPress={() => toggleLike(item.id)}
+                  style={styles.icons}
+                >
+                  <AntDesign
+                    name={likedPosts.includes(item.id) ? "heart" : "hearto"} // Toggle heart icon based on like state
+                    size={28}
+                    color={likedPosts.includes(item.id) ? "red" : "black"} // Toggle icon color based on like state
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.icons}>
                   <Feather name="message-circle" size={28} color="black" />
