@@ -9,33 +9,7 @@ import {
 } from "react-native";
 import { Feather, AntDesign } from "@expo/vector-icons"; // You'll need to import the Feather icons library
 
-const data = [
-  {
-    id: "1",
-    username: "jane_smith",
-    userImage:
-      "https://static.bandainamcoent.eu/high/one-piece/one-piece-world-seeker/00-page-setup/opws_game-thumbnail.jpg",
-    imageUrl:
-      "https://static.bandainamcoent.eu/high/one-piece/one-piece-world-seeker/00-page-setup/opws_game-thumbnail.jpg",
-    caption: "Exploring the wilderness.",
-    likes: 187,
-    comments: 12,
-    timestamp: "4 hours ago",
-  },
-  {
-    id: "2",
-    username: "john_doe",
-    userImage: "https://www.freepnglogos.com/uploads/one-piece-logo-9.jpg",
-    imageUrl: "https://www.freepnglogos.com/uploads/one-piece-logo-9.jpg",
-    caption: "Beautiful sunset!",
-    likes: 235,
-    comments: 18,
-    timestamp: "2 hours ago",
-  },
-  // Add more posts here
-];
-
-const FeedPosts = () => {
+const FeedPosts = ({ feedPosts }) => {
   const [likedPosts, setLikedPosts] = useState([]);
   const toggleLike = (postId) => {
     if (likedPosts.includes(postId)) {
@@ -49,7 +23,7 @@ const FeedPosts = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={data}
+        data={feedPosts}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.postContainer}>
